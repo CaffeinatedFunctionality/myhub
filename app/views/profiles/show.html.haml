@@ -1,0 +1,10 @@
+.page-header
+  .container
+    .user-avatar
+      %a.th{:href => ""}
+        = image_tag @user.avatar(:medium)
+    .user-name
+      %h2= @alias
+%h3
+  %b Owner Name:
+  = @ownername
