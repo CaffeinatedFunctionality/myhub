@@ -7,12 +7,14 @@ class ApplicationController < ActionController::Base
 
   def configure_devise_params
     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :password, :password_confirmation, :remember_me, :alias)}
-    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:city, :email, :current_password, :password, :password_confirmation, :remember_me, :alias, :avatar)}
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :current_password, :password, :password_confirmation, :remember_me, :alias, :avatar)}
   end
 
   def create
     @user = User.create( user_params )
   end
+
+
 
   private
   # Use strong_parameters for attribute whitelisting
@@ -21,4 +23,11 @@ class ApplicationController < ActionController::Base
   def user_params
     params.require(:user).permit(:avatar, :email, :password, :password_confirmation)
   end
+
+  def posting_params
+      params.require(:posting).permit(:content, :id)
+  end
+
+
+  
 end

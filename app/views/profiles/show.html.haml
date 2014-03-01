@@ -1,10 +1,28 @@
-.page-header
-  .container
-    .user-avatar
-      %a.th{:href => ""}
-        = image_tag @user.avatar(:medium)
-    .user-name
-      %h2= @alias
-%h3
-  %b Owner Name:
-  = @ownername
+- if current_user
+  #createRibbit.panel.right
+    %h1 Create a Post
+    %p
+    = form_for @posting do |f|
+      = f.text_area :content, class: 'ribbitText'
+      = f.submit "Post"
+#ribbits.panel.left
+  %h1 Your Profile
+  .ribbitWrapper
+    %img.avatar{:src => @user.avatar(:small)}
+      / %span.name= @user.name
+      @#{@alias}
+      %p
+        = @user.postings.size
+        Posts
+        %span.spacing XX Followers
+        %span.spacing XX Following
+.panel.left
+  %h1 Your Posts
+  - @user.postings.each do |posting|
+    .ribbitWrapper
+      %img.avatar{:src => @user.avatar(:thumb)}
+        /%span.name= @user.name
+        @#{@alias}
+        %span.time= time_ago_in_words(posting.created_at)
+        %p
+          = posting.content

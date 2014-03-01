@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+  %body
+    %header
+      .wrapper
+        = image_tag("gfx/logo.png")
+        %span iStockHub
+        - if current_user
+          = link_to "Log Out", logout_path
+        - else
+          = form_tag login_path do
+            = text_field_tag :username, nil, placeholder: "username"
+            = password_field_tag :password, nil,  placeholder: "password"
+            = submit_tag "Log In"
+    #content
+      .wrapper
+        - flash.each do |name, msg|
+          = content_tag :div, msg, class: "flash #{name}"
+        = yield
+    %footer
+      .wrapper
+        Ribbit - A Twitter Clone Tutorial
+        = image_tag("gfx/logo-nettuts.png")

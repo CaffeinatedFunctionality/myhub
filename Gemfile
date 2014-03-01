@@ -8,6 +8,8 @@ gem 'pg'
 gem 'devise'
 gem 'paperclip'
 gem 'foundation-rails'
+gem 'better_errors'
+gem 'haml'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
