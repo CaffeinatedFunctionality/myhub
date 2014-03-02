@@ -24,14 +24,14 @@ class PostingsController < ApplicationController
   # POST /postings
   # POST /postings.json
   def create
-    @posting = Posting.new(posting_params)
+    @posting = current_user.postings.build(posting_params)
 
     respond_to do |format|
       if @posting.save
-        format.html { redirect_to @posting, notice: 'Posting was successfully created.' }
+        format.html { redirect_to authenticated_path, notice: 'Posting was successfully created.' }
         format.json { render action: 'show', status: :created, location: @posting }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to authenticated_path }
         format.json { render json: @posting.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +69,6 @@ class PostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:content, :user_id)
+      params.require(:posting).permit(:content)
     end
 end

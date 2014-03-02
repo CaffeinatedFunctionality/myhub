@@ -1,28 +1,27 @@
-- if current_user
-  #createRibbit.panel.right
-    %h1 Create a Post
-    %p
-    = form_for @posting do |f|
-      = f.text_area :content, class: 'ribbitText'
-      = f.submit "Post"
-#ribbits.panel.left
+.panel.left
   %h1 Your Profile
-  .ribbitWrapper
+  .wrapper
     %img.avatar{:src => @user.avatar(:small)}
       / %span.name= @user.name
       @#{@alias}
       %p
-        = @user.postings.size
+        = @user.postings.count
         Posts
         %span.spacing XX Followers
         %span.spacing XX Following
-.panel.left
+.panel.right
+  - if current_user
+    %h1 Create a Post
+    %p
+    = form_for @posting do |f|
+      = f.text_area :content, class: 'text'
+      = f.submit "Post"
   %h1 Your Posts
   - @user.postings.each do |posting|
-    .ribbitWrapper
-      %img.avatar{:src => @user.avatar(:thumb)}
-        /%span.name= @user.name
-        @#{@alias}
-        %span.time= time_ago_in_words(posting.created_at)
-        %p
-          = posting.content
+    %img.avatar{:src => @user.avatar(:thumb)}
+      /%span.name= @user.name
+      @#{@alias}
+      =posting.content
+      %br/
+      %span.time= time_ago_in_words(posting.created_at) + " ago"
+      %p
