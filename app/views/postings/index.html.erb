@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Content</th>
+      <th>Body</th>
       <th>User</th>
       <th></th>
       <th></th>
@@ -14,7 +14,7 @@
   <tbody>
     <% @postings.each do |posting| %>
       <tr>
-        <td><%= posting.content %></td>
+        <td><%= posting.body %></td>
         <td><%= posting.user_id %></td>
         <td><%= link_to 'Show', posting %></td>
         <td><%= link_to 'Edit', edit_posting_path(posting) %></td>

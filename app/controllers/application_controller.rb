@@ -28,6 +28,5 @@ class ApplicationController < ActionController::Base
       params.require(:posting).permit(:content, :id)
   end
 
-
   
 end

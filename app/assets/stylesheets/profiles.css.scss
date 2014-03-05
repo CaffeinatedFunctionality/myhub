@@ -1,3 +1,29 @@
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.left-border {
+  border-left: 1px solid grey;
+}
+
+.bottom-border {
+	border-bottom: 1px solid grey;		
+}
+
+.margin-top {
+	margin-top: 20px;
+}
+
+.posts {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid grey;
+}
+
+.center {
+	text-align: center;
+}
+
+.left-align{
+	align:left;
+}

@@ -42,10 +42,10 @@ class PostingsController < ApplicationController
   def update
     respond_to do |format|
       if @posting.update(posting_params)
-        format.html { redirect_to @posting, notice: 'Posting was successfully updated.' }
+        format.html { redirect_to authenticated_path, notice: 'Posting was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to authenticated_path }
         format.json { render json: @posting.errors, status: :unprocessable_entity }
       end
     end
@@ -56,7 +56,7 @@ class PostingsController < ApplicationController
   def destroy
     @posting.destroy
     respond_to do |format|
-      format.html { redirect_to postings_url }
+      format.html { redirect_to authenticated_path }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class PostingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:content)
+      params.require(:posting).permit(:body)
     end
 end

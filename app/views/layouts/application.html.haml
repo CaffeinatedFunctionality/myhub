@@ -1,26 +1,31 @@
 !!!
-%html
+%html{:lang => "en"}
   %head
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "foundation-rails"
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "vendor/modernizr"
+    = csrf_meta_tags
   %body
-    %header
-      .wrapper
-        = image_tag("gfx/logo.png")
-        %span iStockHub
-        - if current_user
-          = link_to "Log Out", logout_path
-        - else
-          = form_tag login_path do
-            = text_field_tag :username, nil, placeholder: "username"
-            = password_field_tag :password, nil,  placeholder: "password"
-            = submit_tag "Log In"
-    #content
-      .wrapper
-        - flash.each do |name, msg|
-          = content_tag :div, msg, class: "flash #{name}"
-        = yield
-    %footer
-      .wrapper
-        Ribbit - A Twitter Clone Tutorial
-        = image_tag("gfx/logo-nettuts.png")
+    %nav.top-bar{"data-topbar" => ""}
+      %ul.title-area
+        %li.name
+          %h1
+            %a{:href => "/"} i$tockHub
+        %li.toggle-topbar.menu-icon
+          %a{:href => "#"} Menu
+      %section.top-bar-section
+        / Right Nav Section
+        %ul.right
+          - if user_signed_in?
+            %li= link_to "Edit Profile", edit_user_registration_path
+            %li= link_to "Log Out", logout_path
+            %li= link_to "My Profile", profile_path(current_user)
+          - else
+            %li= link_to "Sign Up", register_path
+            %li= link_to "Log In", login_path
+        / Left Nav Section
+        %ul.left
+    = yield
+    = javascript_include_tag "application"
