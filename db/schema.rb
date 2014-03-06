@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304224911) do
+ActiveRecord::Schema.define(version: 20140305214425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,31 +25,31 @@ ActiveRecord::Schema.define(version: 20140304224911) do
 
   add_index "postings", ["user_id", "created_at"], name: "index_postings_on_user_id_and_created_at", using: :btree
 
-  create_table "simple_hashtag_hashtaggings", force: true do |t|
+  create_table "supertag_hashtaggings", force: true do |t|
     t.integer "hashtag_id"
     t.integer "hashtaggable_id"
     t.string  "hashtaggable_type"
   end
 
-  add_index "simple_hashtag_hashtaggings", ["hashtag_id"], name: "index_simple_hashtag_hashtaggings_on_hashtag_id", using: :btree
-  add_index "simple_hashtag_hashtaggings", ["hashtaggable_id", "hashtaggable_type"], name: "index_hashtaggings_hashtaggable_id_hashtaggable_type", using: :btree
+  add_index "supertag_hashtaggings", ["hashtag_id"], name: "index_supertag_hashtaggings_on_hashtag_id", using: :btree
+  add_index "supertag_hashtaggings", ["hashtaggable_id", "hashtaggable_type"], name: "index_hashtaggings_hashtaggable_id_hashtaggable_type", using: :btree
 
-  create_table "simple_hashtag_hashtags", force: true do |t|
+  create_table "supertag_hashtags", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "simple_usertag_usertaggings", force: true do |t|
-    t.integer "usertag_id"
-    t.integer "usertaggable_id"
-    t.string  "usertaggable_type"
+  create_table "supertag_moneytaggings", force: true do |t|
+    t.integer "moneytag_id"
+    t.integer "moneytaggable_id"
+    t.string  "moneytaggable_type"
   end
 
-  add_index "simple_usertag_usertaggings", ["usertag_id"], name: "index_simple_usertag_usertaggings_on_usertag_id", using: :btree
-  add_index "simple_usertag_usertaggings", ["usertaggable_id", "usertaggable_type"], name: "index_usertaggings_usertaggable_id_usertaggable_type", using: :btree
+  add_index "supertag_moneytaggings", ["moneytag_id"], name: "index_supertag_moneytaggings_on_moneytag_id", using: :btree
+  add_index "supertag_moneytaggings", ["moneytaggable_id", "moneytaggable_type"], name: "index_moneytaggings_moneytaggable_id_moneytaggable_type", using: :btree
 
-  create_table "simple_usertag_usertags", force: true do |t|
+  create_table "supertag_moneytags", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -65,6 +65,21 @@ ActiveRecord::Schema.define(version: 20140304224911) do
   add_index "supertag_taggings", ["taggable_id", "taggable_type"], name: "index_taggings_taggable_id_taggable_type", using: :btree
 
   create_table "supertag_tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "supertag_usertaggings", force: true do |t|
+    t.integer "usertag_id"
+    t.integer "usertaggable_id"
+    t.string  "usertaggable_type"
+  end
+
+  add_index "supertag_usertaggings", ["usertag_id"], name: "index_supertag_usertaggings_on_usertag_id", using: :btree
+  add_index "supertag_usertaggings", ["usertaggable_id", "usertaggable_type"], name: "index_usertaggings_usertaggable_id_usertaggable_type", using: :btree
+
+  create_table "supertag_usertags", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

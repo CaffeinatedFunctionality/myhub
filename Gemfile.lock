@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/scy0846/supertag.git
-  revision: f3873e687eff27eaa08c6fc54e08e1cdc462e9d3
+  revision: d76ea4d368963bf9cf053dbe666d3f65bd929b90
   specs:
     supertag (0.1.8)
       rails (> 3.2.0)
@@ -80,7 +80,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (4.7.5)
-    multi_json (1.8.4)
+    multi_json (1.9.0)
     orm_adapter (0.5.0)
     paperclip (4.1.1)
       activemodel (>= 3.0.0)

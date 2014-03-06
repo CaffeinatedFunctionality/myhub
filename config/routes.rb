@@ -1,10 +1,10 @@
 Istockhub::Application.routes.draw do
-  get "tags/:tag",   to: "tags#show",      as: :tag
-  get "tags",            to: "tags#index",     as: :tags
   get "usertags/:usertag",   to: "usertags#show",      as: :usertag
   get "usertags",            to: "usertags#index",     as: :usertags
   get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
   get "hashtags",            to: "hashtags#index",     as: :hashtags
+  get "moneytag/:moneytag",  to: "moneytags#show",     as: :moneytag
+  get "moneytags",           to: "moneytags#index",    as: :moneytags
   resources :postings
 
   devise_for :users
