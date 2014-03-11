@@ -31,7 +31,7 @@ Istockhub::Application.routes.draw do
     end
   end
 
-  get '/profiles/:id' => 'profiles#show', as: :profile
+  get ':id' => 'profiles#show', as: :profile
   # You can have the root of your site routed with "root"
   # root 'devise/sessions#new'
 

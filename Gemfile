@@ -12,6 +12,7 @@ gem 'better_errors'
 gem 'haml'
 gem 'yahoo-finance', require: 'yahoo_finance'
 gem 'supertag', :git => 'https://github.com/scy0846/supertag.git'
+gem 'friendly_id'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

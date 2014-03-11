@@ -2,7 +2,8 @@
   .large-3.columns.panel
     %img.avatar{:src => @user.avatar(:thumb), class: 'th'}
       / %span.name= @user.name
-      %b  @#{@alias}
+      %b  
+        = @username
       %p
       .small-3.columns
         Posts
@@ -32,19 +33,20 @@
         .center           
           %h2 Posts
         %br
-        - @user.postings.each do |posting|
-          .row
-            .posts
-            .container          
-              .small-3.columns
-                %img.avatar{:src => @user.avatar(:thumb), class: 'th'} 
-              .small-9.columns  
-                /%span.name= @user.name
-                .h3
-                  = @alias
-                = linkify_tags(posting.body)
-                %p
-                %span.time= time_ago_in_words(posting.created_at) + " ago"
-                -if current_user
-                  = link_to 'Edit', edit_posting_path(posting)
-                  = link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' }    
+          - @allpostings.each do |posting|
+            =if posting.body =~ /#{@username}/ || posting.user == @user
+              .row
+                .posts
+                .container          
+                  .small-3.columns
+                    %img.avatar{:src => posting.user.avatar(:thumb), class: 'th'} 
+                  .small-9.columns  
+                    /%span.name= @user.name
+                    .h3
+                    = linkify_tags(posting.user.username)
+                    = linkify_tags(posting.body)
+                    %p
+                    %span.time= time_ago_in_words(posting.created_at) + " ago"
+                    -if current_user
+                      = link_to 'Edit', edit_posting_path(posting)
+                      = link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' }    
