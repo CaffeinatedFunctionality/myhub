@@ -6,5 +6,5 @@ class MoneytagsController < ApplicationController
   def show
     @moneytag = Supertag::Moneytag.find_by_name(params[:moneytag])
     @moneytagged = @moneytag.moneytaggables if @moneytag
-  end
+  end 
 end
