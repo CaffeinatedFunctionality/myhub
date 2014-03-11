@@ -1,5 +1,5 @@
 module TagsHelper
-  REGEXS = [[Supertag::Usertag::USERTAG_REGEX, :usertag_path], 
+  REGEXS = [[Supertag::Usertag::USERTAG_REGEX, :profile_path], 
             [Supertag::Hashtag::HASHTAG_REGEX, :hashtag_path], 
             [Supertag::Moneytag::MONEYTAG_REGEX, :moneytag_path]]
 

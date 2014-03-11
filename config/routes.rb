@@ -1,4 +1,5 @@
 Istockhub::Application.routes.draw do
+  resources :relationships
   get "usertags/:usertag",   to: "usertags#show",      as: :usertag
   get "usertags",            to: "usertags#index",     as: :usertags
   get "hashtags/:hashtag",   to: "hashtags#show",      as: :hashtag
@@ -6,8 +7,15 @@ Istockhub::Application.routes.draw do
   get "moneytag/:moneytag",  to: "moneytags#show",     as: :moneytag
   get "moneytags",           to: "moneytags#index",    as: :moneytags
   resources :postings
-
+  get '/users/:id/following', :to => 'users#following'   
+  get '/users/:id/followers', :to => 'users#followers'
   devise_for :users
+  resources  :users, :only => [:index, :show] do
+    member do
+      get :following, :followers
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get "profiles/show"

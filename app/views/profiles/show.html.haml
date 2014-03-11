@@ -1,52 +1,43 @@
 .row.margin-top
-  .large-3.columns.panel
+  .large-4.columns.panel
     %img.avatar{:src => @user.avatar(:thumb), class: 'th'}
       / %span.name= @user.name
       %b  
         = @username
+        = render 'follow_form' if signed_in?
       %p
-      .small-3.columns
-        Posts
-        %br
-        = @user.postings.count
-      .small-5.columns.left-border
-        Followers
-        %br
-        XX
-      .small-4.columns.left-border  
-        Following
-        %br
-        XX        
-  .large-8.columns
-    - if current_user
+        = render "stats"        
+  .large-7.columns
+    - if current_user == @user
       .row.panel
-        .small-3.columns
+        .small-4.columns
           %h4 Create Post
-        .small-9.columns  
+        .small-7.columns  
           = form_for @posting do |f|
             .row.collapse
               .small-10.columns
                 = f.text_area :body, class: 'text'
               .small-2.columns  
                 = f.submit "Post", class: 'button'
-      .panel             
-        .center           
-          %h2 Posts
-        %br
-          - @allpostings.each do |posting|
-            =if posting.body =~ /#{@username}/ || posting.user == @user
-              .row
-                .posts
-                .container          
-                  .small-3.columns
-                    %img.avatar{:src => posting.user.avatar(:thumb), class: 'th'} 
-                  .small-9.columns  
-                    /%span.name= @user.name
-                    .h3
-                    = linkify_tags(posting.user.username)
-                    = linkify_tags(posting.body)
-                    %p
-                    %span.time= time_ago_in_words(posting.created_at) + " ago"
-                    -if current_user
-                      = link_to 'Edit', edit_posting_path(posting)
-                      = link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' }    
+        .small-1.columns        
+    .panel             
+      .center           
+        %h2 Posts
+      %br
+        - @allpostings.each do |posting|
+          =if posting.body =~ /#{@username}/ || posting.user == @user
+            .row
+              .posts
+              .container          
+                .small-3.columns
+                  %img.avatar{:src => posting.user.avatar(:thumb), class: 'th'} 
+                .small-9.columns  
+                  /%span.name= @user.name
+                  .h3
+                  = linkify_tags("@" + posting.user.username)
+                  = linkify_tags(posting.body)
+                  %p
+                  %span.time= time_ago_in_words(posting.created_at) + " ago"
+                  -if current_user
+                    = link_to 'Edit', edit_posting_path(posting)
+                    = link_to 'Destroy', posting, method: :delete, data: { confirm: 'Are you sure?' }    
