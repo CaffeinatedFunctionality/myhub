@@ -9,37 +9,37 @@ Istockhub::Application.routes.draw do
   resources :postings
   get '/users/:id/following', :to => 'users#following'   
   get '/users/:id/followers', :to => 'users#followers'
-  # devise_for :users
-  # resources  :users, :only => [:index, :show] do
-  #   member do
-  #     get :following, :followers
-  #   end
-  # end
+  devise_for :users
+  resources  :users, :only => [:index, :show] do
+    member do
+      get :following, :followers
+    end
+  end
 
-  # # The priority is based upon order of creation: first created -> highest priority.
-  # # See how all your routes lay out with "rake routes".
-  # get "profiles/show"
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+  get "profiles/show"
 
-  # devise_scope :user do
-  #   get '/register', to: 'devise/registrations#new', as: :register
-  #   get '/login', to: 'devise/sessions#new', as: :login
-  #   get '/logout', to: 'devise/sessions#destroy', as: :logout
-  #   get '/edit', to: 'devise/registrations#edit', as: :edit
-  # end
+  devise_scope :user do
+    get '/register', to: 'devise/registrations#new', as: :register
+    get '/login', to: 'devise/sessions#new', as: :login
+    get '/logout', to: 'devise/sessions#destroy', as: :logout
+    get '/edit', to: 'devise/registrations#edit', as: :edit
+  end
 
-  # authenticated :user do
-  #   devise_scope :user do
-  #     root to: "profiles#show", :as => "authenticated"
-  #   end
-  # end
+  authenticated :user do
+    devise_scope :user do
+      root to: "profiles#show", :as => "authenticated"
+    end
+  end
 
-  # unauthenticated do
-  #   devise_scope :user do
-  #     root to: "devise/sessions#new", :as => "unauthenticated"
-  #   end
-  # end
+  unauthenticated do
+    devise_scope :user do
+      root to: "devise/sessions#new", :as => "unauthenticated"
+    end
+  end
 
-  # get ':id' => 'profiles#show', as: :profile
+  get ':id' => 'profiles#show', as: :profile
   # You can have the root of your site routed with "root"
   # root 'devise/sessions#new'
 
