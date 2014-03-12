@@ -37,6 +37,7 @@ Devise.setup do |config|
   # if you set :request_keys to [:subdomain], :subdomain will be used on authentication.
   # The same considerations mentioned for authentication_keys also apply to request_keys.
   # config.request_keys = []
+  config.secret_key = 'c1d86f77d67c386798d9168e441d18f26cabd7ff384c6f179a73e422396f0190e1a649f9f85b83f94e53ba53fc84d3806fb0446a66882388b7332043375b58b0'
 
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
