@@ -10,6 +10,10 @@
 	border-bottom: 1px solid grey;		
 }
 
+.bottom-top {
+	border-bottom: 1px solid grey;		
+}
+
 .margin-top {
 	margin-top: 20px;
 }
@@ -26,4 +30,10 @@
 
 .left-align{
 	align:left;
+}
+
+// .row {min-width:70% !important}
+.row .columns, .row .column {
+    padding-left: 20px; /* change the values to anything that you want */
+    padding-right: 20px;
 }

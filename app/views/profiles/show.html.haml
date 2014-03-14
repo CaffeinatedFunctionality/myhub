@@ -1,12 +1,14 @@
 .row.margin-top
-  .large-4.columns.panel
+  .large-5.columns.panel
     %img.avatar{:src => @user.avatar(:thumb), class: 'th'}
       / %span.name= @user.name
       %b  
         = linkify_tags(@username)
         = render 'follow_form' if signed_in?
       %p
-        = render "stats"        
+        = render "stats"
+    .row.center
+      %iframe{:frameborder => "0", :height => "300", :scrolling => "no", :src => "http://widgets.freestockcharts.com/WidgetServer/InteractiveChartWidget.aspx?guid=df1994a4-d620-40c5-b9f1-8b92a5c502e6&w=300&h=300", :style => "border:none;", :width => "300"}                                     
   .large-7.columns
     - if current_user == @user
       .row.panel
@@ -24,4 +26,4 @@
       .center           
         %h2 Posts
       %br
-        = render "show_posts"
+        = render "show_posts"  
