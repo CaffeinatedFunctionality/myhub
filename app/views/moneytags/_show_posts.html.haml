@@ -1,5 +1,5 @@
 - @allpostings.each do |posting|
-  -if posting.body =~ /#{@stockname}/ || posting.user == @user
+  -if posting.body =~ /\$#{$moneytag}/
     .row
       .posts
       .container          

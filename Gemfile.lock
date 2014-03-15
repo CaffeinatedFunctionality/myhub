@@ -12,9 +12,9 @@ GIT
 
 GIT
   remote: https://github.com/scy0846/supertag.git
-  revision: d76ea4d368963bf9cf053dbe666d3f65bd929b90
+  revision: 62d11db06d6ec844e5c2ffa879e1f4fc846ebd1e
   specs:
-    supertag (0.1.8)
+    supertag (0.2.0)
       rails (> 3.2.0)
 
 GEM
@@ -44,6 +44,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    angularjs-rails (1.2.14)
     arel (4.0.2)
     atomic (1.1.15)
     bcrypt (3.1.7)
@@ -73,7 +74,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
-    foundation-rails (5.1.1.0)
+    foundation-rails (5.2.1.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     friendly_id (5.0.3)
@@ -129,10 +130,11 @@ GEM
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
-    sass (3.2.14)
-    sass-rails (4.0.1)
+    sass (3.2.15)
+    sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
-      sass (>= 3.1.10)
+      sass (~> 3.2.0)
+      sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0.0)
     sdoc (0.4.0)
       json (~> 1.8)
@@ -155,7 +157,7 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.1)
       coffee-rails
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -165,12 +167,14 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    will_paginate (3.0.5)
     yahoo-finance (0.0.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  angularjs-rails
   better_errors
   coffee-rails (~> 4.0.0)
   devise
@@ -191,4 +195,5 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   unicorn
+  will_paginate
   yahoo-finance

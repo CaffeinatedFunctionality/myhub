@@ -1,0 +1,30 @@
+- if @moneytagged
+  .row.margin-top
+  .large-5.columns.panel.center
+    %h1  
+      = linkify_tags(@stock)
+    = render 'follow_form' if signed_in?
+    %p
+      = render "stats"                                   
+  .large-7.columns
+    .row.panel
+      .small-4.columns
+        %h4 Create Post
+      .small-6.columns  
+        = form_for @posting do |f|
+          .row.collapse
+            .small-10.columns
+              = f.text_area :body, class: 'text'
+            .small-2.columns  
+              = f.submit "Post", class: 'button'
+      .small-2.columns        
+    .panel             
+      .center           
+        %h2 Posts
+      %br
+        = render "show_posts"
+- else
+  %p
+    There is no match for the
+    %em= params[:moneytag]
+    moneytag.

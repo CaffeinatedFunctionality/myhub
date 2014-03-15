@@ -1,0 +1,6 @@
+.panel  
+  %a{:href => profile_path(user)}
+    %img.avatar{:src => user.avatar(:thumb), class: 'th'}
+  %b  
+    = link_to "@" + user.username, profile_path(user)
+  %br

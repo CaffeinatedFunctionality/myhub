@@ -1,22 +1,18 @@
 - provide(:title, @title)
-.row
-  %aside.span4
-    %section
-      %img.avatar{:src => current_user.avatar(:thumb), class: 'th'}
-      %h1= @user.username
-      %span= link_to "view my profile", @user
-      %span
-        %b Posts:
-        = @user.postings.count
-    %section
-      = render 'stats'
+.row.margin-top
+  .large-5.columns.panel
+    %img.avatar{:src => @user.avatar(:thumb), class: 'th'}
+      %b
+        = linkify_tags(@username)
+        = render 'follow_form' if signed_in?
+      %p
+        = render "stats"                      
       - if @users.any?
-        .user_avatars
-          - @users.each do |user|
-            %img.avatar{:src => @user.avatar(:thumb), class: 'th'}
-  .span8
-    %h3= @title
+        - @users.each do |user|
+          %a{:href => profile_path(user)}
+            %img.avatar{:src => user.avatar(:smthumb), class: 'th'}
+  .large-7.columns
+    %h3= @title    
     - if @users.any?
-      %ul.users
-        = render @users
-      = will_paginate
+      = render @users
+      /= will_paginate

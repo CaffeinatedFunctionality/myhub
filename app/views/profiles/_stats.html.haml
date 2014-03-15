@@ -5,14 +5,14 @@
     %br
     = @user.postings.count
 .small-5.columns.left-border  
-  %a{:href => following_user_path(@user)}
+  %a{:href => following_path(@user)}
     %strong
       Following
       %br
       = @user.followed_users.count
     
 .small-4.columns.left-border     
-  %a{:href => followers_user_path(@user)}
+  %a{:href => followers_path(@user)}
     %strong
       Followers
       %br
