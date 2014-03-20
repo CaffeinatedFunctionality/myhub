@@ -4,6 +4,11 @@ class Stock < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower	
+  validates :symbol, uniqueness: true
+  
+  extend FriendlyId
+  friendly_id :symbol
+  
 
   def following?(other_user)
     relationships.find_by(followed_id: other_user.id)
@@ -17,5 +22,8 @@ class Stock < ActiveRecord::Base
     relationships.find_by(followed_id: other_user.id).destroy
   end
 
+  def self.find_by_symbol(symbol)
+    Stock.where("symbol =?", symbol).first
+  end
 
 end

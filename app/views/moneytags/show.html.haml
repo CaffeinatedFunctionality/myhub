@@ -1,11 +1,30 @@
-- if @moneytagged
+
+%div{"ng-controller" => "StocksCtrl"}
   .row.margin-top
   .large-5.columns.panel.center
     %h1  
-      = linkify_tags(@stock)
-    = render 'follow_form' if signed_in?
+      = linkify_tags(@stocksymbol)
+    /= render 'follow_form' if signed_in?
     %p
-      = render "stats"                                   
+      /= render "stats"
+    %ul.stock-items  
+      #name
+        #{@stock.name}
+      = succeed "#{@stock.bid}," do
+        %strong Bid:
+      = succeed "#{@stock.ask}," do
+        %strong Ask:
+      %br  
+      = succeed "#{@stock.year_low}," do
+        %strong Year Low:
+      = succeed "#{@stock.year_high}," do
+        %strong Year High:
+      #links
+        Show Chart:
+        %input{"ng-model" => "showStockChart", :type => "checkbox"}
+      #chart{"my-chart" => "", "ng-show" => "showStockChart", :stockid => "#{@stock.id}", :stockname => "#{@stock.name}", :stocksymbol => "#{@stock.symbol}", :style => "padding-right: 30px; padding-left: 20px;padding-top: 15px;"}
+        #loading_chart
+          Loading Chart, this might take a while!                                     
   .large-7.columns
     .row.panel
       .small-4.columns
@@ -22,9 +41,4 @@
       .center           
         %h2 Posts
       %br
-        = render "show_posts"
-- else
-  %p
-    There is no match for the
-    %em= params[:moneytag]
-    moneytag.
+        = render "show_posts" 

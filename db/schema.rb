@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314203537) do
+ActiveRecord::Schema.define(version: 20140320165429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "derivatives", force: true do |t|
+    t.string   "symbol"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "postings", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +48,10 @@ ActiveRecord::Schema.define(version: 20140314203537) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "bid"
+    t.decimal  "ask"
+    t.decimal  "year_high"
+    t.decimal  "year_low"
   end
 
   create_table "supertag_hashtaggings", force: true do |t|

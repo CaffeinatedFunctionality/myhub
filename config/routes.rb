@@ -1,4 +1,7 @@
 Istockhub::Application.routes.draw do
+  get "derivatives/index"
+  get "stocks/index"
+  get "watchlist/index"
   resources :relationships
   get "usertags/:usertag",   to: "usertags#show",      as: :usertag
   get "usertags",            to: "usertags#index",     as: :usertags
@@ -17,6 +20,13 @@ Istockhub::Application.routes.draw do
   #   end
   # end
 
+  scope :api do
+    resources :stocks, defaults: {format: :json} do
+      get :ohlc
+    end
+    get :derivatives, to: 'derivatives#index'
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get "profiles/show"

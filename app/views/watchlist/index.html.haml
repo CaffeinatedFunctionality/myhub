@@ -1,0 +1,33 @@
+%h1 Watchlist
+%div{"ng-controller" => "StocksCtrl"}
+  %form
+    %input{"data-placeholder" => "Enter the name of a listed company", "ng-model" => "newCompany", "ng-required" => "true",type: "hidden", "ui-select2" => "select2Options"}
+  #loading{"ng-show" => "loading"}
+    Loading, please wait!
+  %div{"ng-show" => "error"}
+    There was a problem with the Yahoo Finance API. Please try again later.
+  %ul.stock-items
+    %li{"ng-repeat" => "stock in stocks"}
+      #symbol
+        {{stock.symbol}}
+      #name
+        {{stock.name}}
+      = succeed "{{stock.bid}}," do
+        %span Bid:
+      = succeed "{{stock.ask}}," do
+        %span Ask:
+      = succeed "{{stock.year_low}}," do
+        %span.year-low Year Low:
+      = succeed "{{stock.year_high}}," do
+        %span.year-high Year High:
+      #invest
+        %input{"ng-model" => "amount", :placeholder => "Amount to invest", :type => "number"}
+          %a.btn.btn-primary{:href => "", "ng-click" => "investStock(stock.id, $index)"} Invest
+      #links
+        Show Chart:
+        %input{"ng-model" => "showStockChart", :type => "checkbox"}
+          %a{:href => "", "ng-click" => "updateStock(stock.id, $index)"} Update
+          %a#delete{:href => "", "ng-click" => "deleteStock(stock.id, $index)"} Delete
+      #chart{"my-chart" => "", "ng-show" => "showStockChart", :stockid => "stock.id", :stockname => "stock.name", :stocksymbol => "stock.symbol", :style => "padding-right: 30px; padding-left: 20px;padding-top: 15px;"}
+        #loading_chart
+          Loading Chart, this might take a while!

@@ -1,1 +1,1 @@
-var app = angular.module("istockhub", ['ngResource']);
+var app = angular.module("istockhub", ['ngResource', 'ui.select2']);
