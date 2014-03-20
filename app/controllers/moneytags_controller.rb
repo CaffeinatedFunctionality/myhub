@@ -15,7 +15,15 @@ class MoneytagsController < ApplicationController
   	@username = "@" + @user.username
   	@posting = Posting.new
   	@allpostings = Posting.all
-    @stock ||= @moneytag ? Stock.create(symbol: @moneytag.name.upcase) : Stock.find_by_symbol(params[:moneytag])
+
+    data = YahooFinance.quotes(["#{@moneytag}"], [:ask, :bid, :low_52_weeks, :high_52_weeks, :name])
+
+    @stock ||= @moneytag ? Stock.create(symbol: @moneytag.name.upcase, 
+                                        ask: data[0].ask, 
+                                        bid: data[0].bid,
+                                        year_low: data[0].low_52_weeks,
+                                        year_high: data[0].high_52_weeks,
+                                        name: data[0].name) : Stock.find_by_symbol(params[:moneytag])
     @stocksymbol = "$" + @stock.symbol 
   end 
 
@@ -33,39 +41,6 @@ class MoneytagsController < ApplicationController
     @stocksymbol = "@" + @stock.symbol
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
-  end
-
-  def create
-    respond_with Stock.create(stock_params)
-  end
-
-  def update
-    respond_with Stock.find(params[:id]).update_attributes(stock_params)
-  end
-
-  def destroy
-    respond_with Stock.destroy(params[:id])
-  end
-
-  def ohlc
-    stock = Stock.find(params[:stock_id])
-    url = URI::parse "http://ichart.finance.yahoo.com/table.csv?s=" + stock.symbol + "&c=1962"
-    req = Net::HTTP::get(url).gsub /"/, ''
-
-    csv_format = CSV.parse(req, {converters: :numeric})
-    csv_format = csv_format.drop(1)
-    data = []
-    csv_format.reverse.each do |entry|
-      adjusted_ohlc_factor = entry[6].to_f / entry[4]
-      data.push([entry[0],
-                 adjusted_ohlc_factor * entry[1],
-                 adjusted_ohlc_factor * entry[2],
-                 adjusted_ohlc_factor * entry[3],
-                 entry[6]
-      ])
-    end
-    result = { "ohlc" => data }
-    respond_with result
   end
 
   private

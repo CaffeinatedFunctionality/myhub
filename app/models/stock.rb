@@ -26,4 +26,5 @@ class Stock < ActiveRecord::Base
     Stock.where("symbol =?", symbol).first
   end
 
+
 end
