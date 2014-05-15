@@ -1,0 +1,38 @@
+= widget_div do
+  %h1
+    This is a stock widget
+  /   = linkify_tags(@stocksymbol)
+  / %p
+  /   /= render "stats"
+  / %ul
+  /   #name
+  /     #{@stock.name}
+  /   = succeed "#{@stock.bid}," do
+  /     %strong Bid:
+  /   = succeed "#{@stock.ask}," do
+  /     %strong Ask:
+  /   = succeed "#{@stock.percent_change}," do
+  /     %strong Percent Change:  
+  /   %br  
+  /   = succeed "#{@stock.year_low}," do
+  /     %strong Year Low:
+  /   = succeed "#{@stock.year_high}," do
+  /     %strong Year High:
+  /   #links
+  /     Show Chart:  
+  / .row
+  /   .small-4.columns
+  /     %h4 Create Post
+  /   .small-6.columns  
+  /     = form_tag url_for_event(:submit), :remote => true do
+  /       .row.collapse
+  /         .small-10.columns
+  /           = text_field_tag 'body', class: 'text'
+  /         .small-2.columns  
+  /           = submit_tag "Post", class: 'button'
+  / .small-2.columns        
+  / .row             
+  /   .center           
+  /     %h2 Posts
+  /   %br
+  /     = render "show_posts" 

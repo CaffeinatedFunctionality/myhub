@@ -17,8 +17,10 @@ gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
 gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
 gem 'unicorn'
 gem 'rails_12factor'
-gem 'angularjs-rails'
 gem 'will_paginate'
+gem 'prototype-rails'
+gem 'apotomo'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
