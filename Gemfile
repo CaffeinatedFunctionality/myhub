@@ -20,6 +20,7 @@ gem 'rails_12factor'
 gem 'will_paginate'
 gem 'prototype-rails'
 gem 'apotomo'
+gem 'angularjs-rails'
 
 
 # Use SCSS for stylesheets
